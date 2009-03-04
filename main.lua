@@ -15,6 +15,7 @@ end
 function update(dt)
   if love.mouse.isDown(love.mouse_left) then
     pieces[#pieces]:setPosition(love.mouse.getX(), love.mouse.getY())
+    pieces[#pieces]:setVelocity(0, 0)
   end
   -- Update the world.
   world:update(dt)
