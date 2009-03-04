@@ -31,11 +31,13 @@ function draw()
 end
 
 function mousepressed(x, y, button)
-	local grabbed = {}
-	grabbed.body  = love.physics.newBody(world, x, y)
-	grabbed.shape = love.physics.newCircleShape(grabbed.body, loveImg:getWidth()/2.0)
-	grabbed.shape:setFriction(0) -- very slick surface
-  table.insert(pieces, grabbed)
+  if button == love.mouse_left then
+  	local grabbed = {}
+  	grabbed.body  = love.physics.newBody(world, x, y)
+  	grabbed.shape = love.physics.newCircleShape(grabbed.body, loveImg:getWidth()/2.0)
+  	grabbed.shape:setFriction(0) -- very slick surface
+    table.insert(pieces, grabbed)
+  end
 end
 
 function add(x, y)
