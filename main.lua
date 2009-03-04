@@ -3,7 +3,7 @@ pieces = {}
 
 function load()
   -- Load images.
-	loveImg = love.graphics.newImage("love_ball.png")
+	loveImg = love.graphics.newImage("love_ball.png", love.image_pad_and_optimize)
   -- Create the world.
   world = love.physics.newWorld(2000, 2000)
   world:setGravity(0, 50)
@@ -34,7 +34,7 @@ function mousepressed(x, y, button)
   if button == love.mouse_left then
   	local grabbed = {}
   	grabbed.body  = love.physics.newBody(world, x, y)
-  	grabbed.shape = love.physics.newCircleShape(grabbed.body, loveImg:getWidth()/2.0)
+  	grabbed.shape = love.physics.newCircleShape(grabbed.body, loveImg:getWidth()/2)
   	grabbed.shape:setFriction(0) -- very slick surface
     table.insert(pieces, grabbed)
   end
