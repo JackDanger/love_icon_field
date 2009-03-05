@@ -18,7 +18,8 @@ end
 function update(dt)
   if love.mouse.isDown(love.mouse_left) then
     pieces[#pieces].body:setPosition(love.mouse.getX(), love.mouse.getY())
-    pieces[#pieces].body:setVelocity(0, 0)
+    vx, vy = mouseVelocity()
+    pieces[#pieces].body:setVelocity(vx, vy)
   end
   -- Update the world.
   world:update(dt)
@@ -37,10 +38,26 @@ function mousepressed(x, y, button)
   	grabbed.shape = love.physics.newCircleShape(grabbed.body, loveImg:getWidth()/2)
   	grabbed.shape:setFriction(0) -- very slick surface
     table.insert(pieces, grabbed)
+    -- reset mouse velocity because this piece hasn't moved yet
+    mouseVelocity('reset')
   end
 end
 
-function add(x, y)
-	local b = love.physics.newBody(world, math.random(100, 700), 50)
-	b:setMassFromShapes()
+function mouseVelocity(...)
+  currentMouseCoords = {x = love.mouse.getX(), y = love.mouse.getY()}
+  -- if recentMouseCoords is blank or if an argument was passed to this function
+  -- the reset the saved coordinates
+  if not recentMouseCoords or arg[1] then recentMouseCoords = {currentMouseCoords} end
+  
+  local vx = currentMouseCoords.x - recentMouseCoords[#recentMouseCoords].x
+  local vy = currentMouseCoords.y - recentMouseCoords[#recentMouseCoords].y
+  -- only save a certain number
+  if #recentMouseCoords >= 5 then
+    table.remove(recentMouseCoords, #recentMouseCoords)
+  end
+  -- add the currentMouseCoords to the front of the table.  They'll
+  -- be used in 5 frames
+  table.insert(recentMouseCoords, 1, currentMouseCoords)
+
+  return vx, vy
 end
