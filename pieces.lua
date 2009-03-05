@@ -12,7 +12,7 @@ function pieces.addHeld(x, y)
   mouseVelocity:reset()
 end
 
-function pieces.draw()
+function pieces:draw()
   for i,piece in ipairs(pieces.collection) do
     love.graphics.draw(loveImg, piece.body:getX(), piece.body:getY(), piece.body:getAngle())
   end
