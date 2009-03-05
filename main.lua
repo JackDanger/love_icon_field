@@ -1,5 +1,5 @@
 
-love.filesystem.require 'mouse_velocity.lua'
+love.filesystem.require 'mouseVelocity.lua'
 love.filesystem.require 'scene.lua'
 pieces = {}
 
@@ -11,11 +11,8 @@ function load()
 end
 
 function update(dt)
-  if love.mouse.isDown(love.mouse_left) then
-    pieces[#pieces].body:setPosition(love.mouse.getX(), love.mouse.getY())
-    vx, vy = mouseVelocity:update()
-    pieces[#pieces].body:setVelocity(vx, vy)
-  end
+  -- recalculate mouse velocity
+  mouseVelocity:update()
   -- Update the world.
   world:update(dt)
 end
