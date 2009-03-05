@@ -1,38 +1,29 @@
 
-love.filesystem.require 'mouseVelocity.lua'
 love.filesystem.require 'scene.lua'
-pieces = {}
+love.filesystem.require 'mouseVelocity.lua'
+love.filesystem.require 'pieces.lua'
 
 function load()
   -- Load images.
 	loveImg = love.graphics.newImage("love_ball.png", love.image_pad_and_optimize)
   -- load the world
-	scene:load()
+	scene.load()
 end
 
 function update(dt)
   -- recalculate mouse velocity
-  mouseVelocity:update()
+  mouseVelocity.update()
   -- Update the world.
-  world:update(dt)
+  scene.world:update(dt)
 end
 
 function draw()
-  scene:draw()
-  for i,piece in ipairs(pieces) do
-      love.graphics.draw(loveImg, piece.body:getX(), piece.body:getY(), piece.body:getAngle())
-  end
+  pieces.draw()
 end
 
 function mousepressed(x, y, button)
   if button == love.mouse_left then
-  	local grabbed = {}
-  	grabbed.body  = love.physics.newBody(world, x, y)
-  	grabbed.shape = love.physics.newCircleShape(grabbed.body, loveImg:getWidth()/2)
-  	grabbed.shape:setFriction(0) -- very slick surface
-    table.insert(pieces, grabbed)
-    -- reset mouse velocity because this piece hasn't moved yet
-    mouseVelocity:reset()
+    pieces.addHeld(x, y)
   end
 end
 

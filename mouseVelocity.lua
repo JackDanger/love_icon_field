@@ -9,9 +9,9 @@ end
 
 function mouseVelocity.update()
   if love.mouse.isDown(love.mouse_left) then
-    pieces[#pieces].body:setPosition(love.mouse.getX(), love.mouse.getY())
+    pieces.collection[#pieces.collection].body:setPosition(love.mouse.getX(), love.mouse.getY())
     vx, vy = mouseVelocity:calculate()
-    pieces[#pieces].body:setVelocity(vx, vy)
+    pieces.collection[#pieces.collection].body:setVelocity(vx, vy)
   end
 end
 

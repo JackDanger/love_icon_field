@@ -12,11 +12,11 @@ function scene.load()
   print(videoMode.width, videoMode.height)
   love.graphics.setMode(videoMode.width, videoMode.height, false, false, 0)
   -- Create the world.
-  world = love.physics.newWorld(videoMode.width, videoMode.height)
-  world:setGravity(0, 100)
+  scene.world = love.physics.newWorld(videoMode.width, videoMode.height)
+  scene.world:setGravity(0, 100)
 
   -- Create ground body.
-  ground = love.physics.newBody(world, 0, 0, 0)
+  ground = love.physics.newBody(scene.world, 0, 0, 0)
   ground_shape = love.physics.newRectangleShape(ground, videoMode.width/2, videoMode.height-20, videoMode.width -10, 10)
   -- add walls that go along the edge but also lean out really high to catch stray particles
   wall_left    = love.physics.newPolygonShape(ground,
