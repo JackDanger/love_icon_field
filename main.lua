@@ -12,7 +12,7 @@ end
 
 function update(dt)
   -- recalculate mouse velocity
-  mouseVelocity.update()
+  mouseVelocity:update(dt)
   -- Update the world.
   scene.world:update(dt)
 end
