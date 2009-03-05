@@ -76,3 +76,10 @@ function mouseVelocity(...)
 
   return vx, vy
 end
+
+
+function keypressed(key)
+  if key == love.key_escape then
+    love.system.exit()
+  end
+end
