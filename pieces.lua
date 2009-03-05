@@ -8,7 +8,6 @@ function pieces.addHeld(x, y)
 	grabbed.shape = love.physics.newCircleShape(grabbed.body, loveImg:getWidth()/2)
 	grabbed.shape:setFriction(0) -- very slick surface
   table.insert(pieces.collection, grabbed)
-  print(#pieces.collection)
   -- reset mouse velocity because this piece hasn't moved yet
   mouseVelocity:reset()
 end
