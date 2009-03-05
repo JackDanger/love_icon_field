@@ -16,8 +16,17 @@ function load()
   -- Create ground body.
   ground = love.physics.newBody(world, 0, 0, 0)
   ground_shape = love.physics.newRectangleShape(ground, videoMode.width/2, videoMode.height-20, videoMode.width -10, 10)
-  wall_left    = love.physics.newPolygonShape(ground, 0, 0, 0, videoMode.height, -50, videoMode.height, -50, -50)
-  wall_right   = love.physics.newPolygonShape(ground, videoMode.width, 0, videoMode.width, videoMode.height, videoMode.width + 50, videoMode.height, videoMode.width + 50, videoMode.height +50)
+  -- add walls that go along the edge but also lean out really high to catch stray particles
+  wall_left    = love.physics.newPolygonShape(ground,
+                                                0, 0,
+                                                0, videoMode.height,
+                                                -50, videoMode.height,
+                                                -50, -500)
+  wall_right   = love.physics.newPolygonShape(ground,
+                                                videoMode.width, 0,
+                                                videoMode.width, videoMode.height,
+                                                videoMode.width + 50, videoMode.height,
+                                                videoMode.width + 50, videoMode.height + 500)
 end
 
 function update(dt)
