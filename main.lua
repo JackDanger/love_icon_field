@@ -18,6 +18,7 @@ function update(dt)
 end
 
 function draw()
+  scene.draw()
   pieces.draw()
 end
 
