@@ -1,6 +1,6 @@
 
 love.filesystem.require 'scene.lua'
-love.filesystem.require 'mouseVelocity.lua'
+love.filesystem.require 'mouse.lua'
 love.filesystem.require 'pieces.lua'
 
 function load()
@@ -12,7 +12,7 @@ end
 
 function update(dt)
   -- recalculate mouse velocity
-  mouseVelocity:update(dt)
+  mouse:update(dt)
   -- Update the world.
   scene.world:update(dt)
 end
