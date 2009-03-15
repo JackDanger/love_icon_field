@@ -3,7 +3,7 @@ mouse = {}
 
 function mouse.draw()
   if love.mouse.isDown(love.mouse_left) then
-    local closest = pieces.held.closest()
+    local closest = pieces.held:closest()
     if closest then
       love.graphics.line(
         closest.piece.body:getX(),

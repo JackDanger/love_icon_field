@@ -29,12 +29,6 @@ function mousepressed(x, y, button)
   end
 end
 
-function mousereleased(x, y, button)
-  if button == love.mouse_left then
-    table.insert(pieces.collection, pieces.held)
-  end
-end
-
 function keypressed(key)
   if key == love.key_escape then
     love.system.exit()
