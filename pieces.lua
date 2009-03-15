@@ -2,6 +2,8 @@
 pieces = {}
 pieces.collection = {}
 pieces.scale = 1/10
+-- how close two pieces have to be until the line appears
+pieces.maxDistance = 120
 
 function pieces.addHeld(x, y)
 	local grabbed = {}
