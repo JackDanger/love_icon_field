@@ -4,6 +4,7 @@ love.filesystem.require 'mouse.lua'
 love.filesystem.require 'pieces.lua'
 
 function load()
+  love.graphics.setLineStyle(love.line_smooth)
   -- Load images.
 	loveImg = love.graphics.newImage("love_ball.png", love.image_pad_and_optimize)
   -- load the world

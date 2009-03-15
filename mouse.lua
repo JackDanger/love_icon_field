@@ -5,12 +5,15 @@ function mouse.draw()
   if love.mouse.isDown(love.mouse_left) then
     local closest = pieces.held:closest()
     if closest then
+      local lw = love.graphics.getLineWidth()
+      love.graphics.setLineWidth(11)
       love.graphics.line(
         closest.piece.body:getX(),
         closest.piece.body:getY(),
         love.mouse.getX(),
         love.mouse.getY()
       )
+      love.graphics.setLineWidth(lw)
     end
   end
 end
