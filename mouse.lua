@@ -14,6 +14,10 @@ function mouse.draw()
         love.mouse.getY()
       )
       love.graphics.setLineWidth(lw)
+
+      pieces.held:align(closest)
+    else
+      pieces.held:unalign()
     end
   end
 end

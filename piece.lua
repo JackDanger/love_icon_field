@@ -14,24 +14,38 @@ function piece:new(x, y)
   return instance
 end
 
+function piece:align(other)
+  self.aligned = other
+  if not other.aligned then other.aligned = self end
+end
+
+function piece:unalign()
+  if self.aligned then
+    self.aligned.aligned = nil
+    self.aligned = nil
+  end
+end
+
 function piece:closest()
-  if #pieces.collection > 0 then
-    local closestFound = nil
-    for i,piece in ipairs(pieces.collection) do
-      if piece ~= self then
-        local distance = math.sqrt(
-          (piece.body:getX() - self.body:getX())^2 +
-          (piece.body:getY() - self.body:getY())^2
-        )
-        if distance < pieces.maxDistance
-           and (not closestFound or
-                distance < closestFound.distance) then
-          closestFound = {piece = piece, distance = distance}
-        end
+  if #pieces.collection == 0 then
+    return
+  end
+
+  local closestFound = nil
+  for i,piece in ipairs(pieces.collection) do
+    if piece ~= self then
+      local distance = math.sqrt(
+        (piece.body:getX() - self.body:getX())^2 +
+        (piece.body:getY() - self.body:getY())^2
+      )
+      if distance < pieces.maxDistance
+         and (not closestFound or
+              distance < closestFound.distance) then
+        closestFound = {piece = piece, distance = distance}
       end
     end
-    return closestFound
   end
+  return closestFound
 end
 
 function piece:draw()
