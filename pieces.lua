@@ -11,7 +11,7 @@ function pieces.addHeld(x, y)
 	grabbed.shape:setFriction(0) -- very slick surface
   table.insert(pieces.collection, grabbed)
   -- reset mouse velocity because this piece hasn't moved yet
-  mouseVelocity:reset()
+  mouse.velocity:reset()
 end
 
 function pieces:draw()

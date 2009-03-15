@@ -1,19 +1,20 @@
-mouse = {}
 
+mouse = {}
+mouse.velocity = {}
 -- clear all but the current mouse coordinates
-function mouse.reset()
+function mouse.velocity:reset()
   recentMouseCoords = {x = love.mouse.getX(), y = love.mouse.getY()}
 end
 
-function mouse:update(dt)
+function mouse.velocity:update(dt)
   if love.mouse.isDown(love.mouse_left) then
     pieces.collection[#pieces.collection].body:setPosition(love.mouse.getX(), love.mouse.getY())
-    vx, vy = mouse:calculate(dt)
+    vx, vy = mouse.velocity:calculate(dt)
     pieces.collection[#pieces.collection].body:setVelocity(vx, vy)
   end
 end
 
-function mouse:calculate(dt)
+function mouse.velocity:calculate(dt)
   currentMouseCoords = {x = love.mouse.getX(), y = love.mouse.getY()}
   if not recentMouseCoords then recentMouseCoords = currentMouseCoords end
   
