@@ -3,24 +3,14 @@ mouse = {}
 
 function mouse.draw()
   if love.mouse.isDown(love.mouse_left) then
-    -- try to find the closest piece to the one the mouse is holding
-    local closestPiece = {distance = 10000000}
-    for i,piece in ipairs(pieces.collection) do
-      local distance = math.sqrt(
-                        (piece.body:getX() - love.mouse.getX())^2
-                      + (piece.body:getY() - love.mouse.getY())^2
-                       )
-      if distance < closestPiece.distance then
-        closestPiece.piece = piece
-        closestPiece.distance = distance
-      end
-    end
-    if closestPiece.piece then
+    local closest = pieces.held.closest()
+    if closest then
       love.graphics.line(
-        closestPiece.piece.body:getX(),
-        closestPiece.piece.body:getY(),
+        closest.piece.body:getX(),
+        closest.piece.body:getY(),
         love.mouse.getX(),
-        love.mouse.getY())
+        love.mouse.getY()
+      )
     end
   end
 end

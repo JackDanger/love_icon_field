@@ -6,12 +6,11 @@ pieces.scale = 1/10
 pieces.maxDistance = 120
 
 function pieces.addHeld(x, y)
-	local grabbed = {}
-	grabbed.body  = love.physics.newBody(scene.world, x, y)
-	grabbed.image = pieces:randomImage()
-	grabbed.shape = love.physics.newCircleShape(grabbed.body, grabbed.image:getWidth()/2 * pieces.scale)
-	grabbed.shape:setFriction(0) -- very slick surface
-  table.insert(pieces.collection, grabbed)
+	pieces.held = {}
+	pieces.held.body  = love.physics.newBody(scene.world, x, y)
+	pieces.held.image = pieces:randomImage()
+	pieces.held.shape = love.physics.newCircleShape(pieces.held.body, pieces.held.image:getWidth()/2 * pieces.scale)
+	pieces.held.shape:setFriction(0) -- very slick surface
   -- reset mouse velocity because this piece hasn't moved yet
   mouse.velocity:reset()
 end
