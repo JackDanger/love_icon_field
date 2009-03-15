@@ -16,7 +16,17 @@ end
 
 function piece:closest()
   if #pieces.collection > 0 then
-    return pieces.collection[1]
+    local closestFound = nil
+    for i,piece in ipairs(pieces.collection) do
+      if piece ~= self then
+        distance = math.sqrt( (piece.body:getX() - self.body:getX())^2 +
+                              (piece.body:getY() - self.body:getY())^2 )
+        if not closestFound or distance < closestFound.distance then
+          closestFound = {piece = piece, distance = distance}
+        end
+      end
+    end
+    return closestFound
   end
 end
 
