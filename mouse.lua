@@ -6,8 +6,8 @@ function mouse.draw()
     local closest = pieces.held:closest()
     if closest then
       love.graphics.line(
-        closest.piece.body:getX(),
-        closest.piece.body:getY(),
+        closest.body:getX(),
+        closest.body:getY(),
         love.mouse.getX(),
         love.mouse.getY()
       )

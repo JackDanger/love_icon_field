@@ -15,6 +15,9 @@ function piece:new(x, y)
 end
 
 function piece:closest()
+  if #pieces.collection > 0 then
+    return pieces.collection[1]
+  end
 end
 
 function piece:draw()
