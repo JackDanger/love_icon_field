@@ -3,6 +3,7 @@ piece = {}
 
 function piece:new(x, y)
   local instance = {}
+  instance.id = math.random()
   setmetatable(instance, self)
   self.__index = self
 
@@ -14,9 +15,12 @@ function piece:new(x, y)
   return instance
 end
 
-function piece:align(other)
-  self.aligned = other
-  if not other.aligned then other.aligned = self end
+function piece:alignClosest()
+  self.aligned = piece.closestTo(self)
+  if self.aligned and not self.aligned.aligned then
+    print(self.aligned.id)
+    self.aligned.aligned = self
+  end
 end
 
 function piece:unalign()
@@ -26,17 +30,13 @@ function piece:unalign()
   end
 end
 
-function piece:closest()
-  if #pieces.collection == 0 then
-    return
-  end
-
+function piece.closestTo(other)
   local closestFound = nil
   for i,piece in ipairs(pieces.collection) do
-    if piece ~= self then
+    if piece ~= other then
       local distance = math.sqrt(
-        (piece.body:getX() - self.body:getX())^2 +
-        (piece.body:getY() - self.body:getY())^2
+        (piece.body:getX() - other.body:getX())^2 +
+        (piece.body:getY() - other.body:getY())^2
       )
       if distance < pieces.maxDistance
          and (not closestFound or
@@ -45,7 +45,9 @@ function piece:closest()
       end
     end
   end
-  return closestFound
+  if closestFound then
+    return closestFound.piece
+  end
 end
 
 function piece:draw()

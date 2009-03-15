@@ -16,6 +16,8 @@ function update(dt)
   mouse.velocity:update(dt)
   -- Update the world.
   scene.world:update(dt)
+  -- Update piece locations and states
+  pieces.update(dt)
 end
 
 function draw()

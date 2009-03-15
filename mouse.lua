@@ -3,21 +3,16 @@ mouse = {}
 
 function mouse.draw()
   if love.mouse.isDown(love.mouse_left) then
-    local closest = pieces.held:closest()
-    if closest then
+    if pieces.held and pieces.held.aligned then
       local lw = love.graphics.getLineWidth()
       love.graphics.setLineWidth(11)
       love.graphics.line(
-        closest.piece.body:getX(),
-        closest.piece.body:getY(),
-        love.mouse.getX(),
-        love.mouse.getY()
+        pieces.held.body:getX(),
+        pieces.held.body:getY(),
+        pieces.held.aligned.body:getX(),
+        pieces.held.aligned.body:getY()
       )
       love.graphics.setLineWidth(lw)
-
-      pieces.held:align(closest)
-    else
-      pieces.held:unalign()
     end
   end
 end
@@ -30,9 +25,9 @@ end
 
 function mouse.velocity:update(dt)
   if love.mouse.isDown(love.mouse_left) then
-    pieces.collection[#pieces.collection].body:setPosition(love.mouse.getX(), love.mouse.getY())
+    pieces.held.body:setPosition(love.mouse.getX(), love.mouse.getY())
     vx, vy = mouse.velocity:calculate(dt)
-    pieces.collection[#pieces.collection].body:setVelocity(vx, vy)
+    pieces.held.body:setVelocity(vx, vy)
   end
 end
 

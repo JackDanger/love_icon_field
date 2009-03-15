@@ -14,6 +14,12 @@ function pieces.addHeld(x, y)
   mouse.velocity:reset()
 end
 
+function pieces.update(dt)
+  if pieces.held then
+    pieces.held:alignClosest()
+  end
+end
+
 function pieces.draw()
   for i,piece in ipairs(pieces.collection) do
     piece:draw()
